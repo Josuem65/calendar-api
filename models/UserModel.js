@@ -33,6 +33,7 @@ userSchema.statics.login = async function (username, password) {
 
     // get user
     const user = await this.findOne({ username });
+    console.log({user})
     if (!user) {
       throw Error("Incorrect username");
     }

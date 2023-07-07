@@ -7,7 +7,9 @@ const userRoutes = require("./routes/users");
 
 const PORT = process.env.PORT || 8080;
 const app = express();
-
+app.use(require("cors")({
+    origin: "*",
+}))
 // middleware parses request body as JSON
 app.use(express.json());
 
