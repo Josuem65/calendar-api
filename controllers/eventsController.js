@@ -11,7 +11,7 @@ const getAllEvents = async (_, res) => {
 };
 
 const addEvent = async (req, res) => {
-  const userId = req.currentUser || "test-user"; // pass via middleware
+  const { _id: userId } = req.currentUser || "test-user"; // pass via middleware
   const eventDetails = req.body;
   try {
     const newEvent = await Event.create({
@@ -43,7 +43,7 @@ const deleteEvent = async (req, res) => {
 };
 
 const updateEvent = async (req, res) => {
-  const userId = req.currentUser || "test-user"; // pass via middleware
+  const { _id: userId } = req.currentUser || "test-user"; // pass via middleware
   const { id } = req.params;
   const eventDetails = req.body;
 
