@@ -1,9 +1,10 @@
 const Event = require("../models/eventModel");
 const mongoose = require("mongoose");
 
-const getAllEvents = async (_, res) => {
+const getAllEvents = async (req, res) => {
+  const { userId } = req.currentUser || "test-user"; // pass via middleware
   try {
-    const allEvents = await Event.find({}).sort({ createdAt: -1 });
+    const allEvents = await Event.find({ userId }).sort({ createdAt: -1 });
     res.status(200).json(allEvents);
   } catch (err) {
     res.status(400).json({ error: err.message });
@@ -11,7 +12,7 @@ const getAllEvents = async (_, res) => {
 };
 
 const addEvent = async (req, res) => {
-  const { _id: userId } = req.currentUser || "test-user"; // pass via middleware
+  const { userId } = req.currentUser || "test-user"; // pass via middleware
   const eventDetails = req.body;
   try {
     const newEvent = await Event.create({
@@ -43,7 +44,7 @@ const deleteEvent = async (req, res) => {
 };
 
 const updateEvent = async (req, res) => {
-  const { _id: userId } = req.currentUser || "test-user"; // pass via middleware
+  const { userId } = req.currentUser || "test-user"; // pass via middleware
   const { id } = req.params;
   const eventDetails = req.body;
 
