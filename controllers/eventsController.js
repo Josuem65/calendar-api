@@ -11,12 +11,12 @@ const getAllEvents = async (_, res) => {
 };
 
 const addEvent = async (req, res) => {
-  // const userId = req.currentUser  // pass via middleware
+  const userId = req.currentUser || "test-user"; // pass via middleware
   const eventDetails = req.body;
   try {
     const newEvent = await Event.create({
       ...eventDetails,
-      userId: "test-user", // current authenticated user
+      userId, // current authenticated user
     });
     res.status(201).json(newEvent);
   } catch (err) {
@@ -43,7 +43,7 @@ const deleteEvent = async (req, res) => {
 };
 
 const updateEvent = async (req, res) => {
-  // const userId = req.currentUser  // pass via middleware
+  const userId = req.currentUser || "test-user"; // pass via middleware
   const { id } = req.params;
   const eventDetails = req.body;
 
@@ -53,7 +53,7 @@ const updateEvent = async (req, res) => {
     }
     const event = await Event.findByIdAndUpdate(id, {
       ...eventDetails,
-      userId: "test-user",
+      userId,
     });
 
     if (!event) {
