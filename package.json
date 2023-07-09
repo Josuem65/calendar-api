@@ -5,7 +5,13 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon server.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "build:client": "cd client & yarn build & cd .. & yarn copy:client",
+    "copy:client": "powershell remove-item -recurse $(get-item public/*); copy-item -recurse $(get-item client/dist/*) public",
+    "build:image": "docker build . -t hammonal/calendar-api && yarn start:image",
+    "start:image": "docker run --env-file .env -p 8080:8080 -d hammonal/calendar-api:latest",
+    "push:image": "docker login && docker push hammonal/calendar-api",
+    "push:all": "concurrently \"git pull && git push\" \"yarn push:image\""
   },
   "dependencies": {
     "bcrypt": "^5.1.0",

@@ -1,3 +1,7 @@
+# never track
 node_modules
 .env
 .vscode
+
+# tracked by separate git repo
+client
