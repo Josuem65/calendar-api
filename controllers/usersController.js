@@ -27,6 +27,19 @@ async function signupUser(req, res) {
 
     res.status(201).json({ username, token });
   } catch (err) {
+    console.log(err.message);
+    res.status(400).json({ error: err.message });
+  }
+}
+
+async function findUserByName(req, res) {
+  const { username } = req.params;
+  try {
+    const user = await User.find(username);
+    
+    res.status(200).json({ user });
+  } catch (err) {
+    console.log(err.message);
     res.status(400).json({ error: err.message });
   }
 }
@@ -34,4 +47,5 @@ async function signupUser(req, res) {
 module.exports = {
   loginUser,
   signupUser,
+  findUserByName,
 };

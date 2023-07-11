@@ -24,7 +24,7 @@ async function requireAuth(req, res, next) {
     }
   } catch (err) {
     console.error(err);
-    res.status(401).json({ error: "Request is not authorized." });
+    res.status(401).json({ error: "User request not authorized." });
   }
 };
 

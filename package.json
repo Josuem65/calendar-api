@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "nodemon server.js",
     "start": "node server.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "build:client": "cd client & yarn build & cd .. & yarn copy:client",
     "copy:client": "powershell remove-item -recurse $(get-item public/*); copy-item -recurse $(get-item client/dist/*) public",
     "build:image": "docker build . -t hammonal/calendar-api && yarn start:image",
@@ -23,6 +25,7 @@
     "validator": "^13.9.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22"
+    "nodemon": "^2.0.22",
+    "vitest": "^0.33.0"
   }
 }
