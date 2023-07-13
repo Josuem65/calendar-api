@@ -8,6 +8,7 @@
     "start": "node server.js",
     "test": "vitest run",
     "test:watch": "vitest",
+    "dev:client": "concurrently \"yarn dev\" \"cd client && yarn dev\"",
     "build:client": "cd client & yarn build & cd .. & yarn copy:client",
     "copy:client": "powershell remove-item -recurse $(get-item public/*); copy-item -recurse $(get-item client/dist/*) public",
     "build:image": "docker build . -t hammonal/calendar-api && yarn start:image",

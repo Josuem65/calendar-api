@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
-// const validator = require("validator");
+const validator = require("validator");
 
 const userSchema = new Schema({
   username: {
@@ -24,6 +24,11 @@ async function hashPassword(password) {
   return hash;
 }
 
+userSchema.statics.find = async function (username) {
+  const user = await this.findOne({ username })
+  return user;
+}
+
 // static login method
 userSchema.statics.login = async function (username, password) {
     // validation
@@ -33,7 +38,6 @@ userSchema.statics.login = async function (username, password) {
 
     // get user
     const user = await this.findOne({ username });
-    console.log({user})
     if (!user) {
       throw Error("Incorrect username");
     }
@@ -56,9 +60,9 @@ userSchema.statics.signup = async function (username, password) {
   // if (!validator.isEmail(email)) {
   //   throw Error("Please provide a valid email address.");
   // }
-  // if (!validator.isStrongPassword(password)) {
-  //   throw Error("Please provide a stronger password.");
-  // }
+  if (!validator.isStrongPassword(password)) {
+    throw Error("Password is not strong enough.");
+  }
 
   const exists = await this.findOne({ username });
   if (exists) {
