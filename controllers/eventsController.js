@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const getAllEvents = async (req, res) => {
   const { userId } = req.currentUser || "test-user"; // pass via middleware
   try {
-    const allEvents = await Event.find({ userId }).sort({ createdAt: -1 });
+    const allEvents = await Event.find({ userId }).sort({ startDate: 1 });
     res.status(200).json(allEvents);
   } catch (err) {
     res.status(400).json({ error: err.message });
