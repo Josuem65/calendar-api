@@ -1,0 +1,30 @@
+{
+  "name": "client",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"vite\" \"cd server & yarn dev\"",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "concurrently \"npm run dev\" \"cd server && npm run start\""
+  },
+  "dependencies": {
+    "@formkit/vue": "^0.17.4",
+    "@fullcalendar/core": "^6.1.8",
+    "@fullcalendar/daygrid": "^6.1.8",
+    "@fullcalendar/interaction": "^6.1.8",
+    "@fullcalendar/vue3": "^6.1.8",
+    "@vue/test-utils": "^2.4.0",
+    "@vueuse/core": "^10.2.1",
+    "axios": "^1.4.0",
+    "concurrently": "^8.2.0",
+    "vue": "^3.2.47",
+    "vue-router": "^4.2.3",
+    "vuex": "^4.0.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.1.0",
+    "vite": "^4.3.9"
+  }
+}
